@@ -1,0 +1,279 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║           STUDENT PERFORMANCE TRACKING SYSTEM                              ║
+║           COMPLETE SETUP GUIDE                                             ║
+║           MUET – Dept. of Software Engineering, Khairpur                   ║
+║           Course: SW121 – Object Oriented Programming                      ║
+║           Instructor: Engr. Asmatullah Zubair | Batch: K24SW               ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ★  IMPORTANT DATABASE INFORMATION  ★
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Database Name   :  student_performance_db
+  Host            :  localhost
+  Port            :  3306
+  Username        :  root
+  Password        :  (empty – XAMPP default has no password)
+  SQL Script File :  sql/schema.sql   ← RUN THIS IN phpMyAdmin
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ★  DEFAULT LOGIN CREDENTIALS  ★
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ROLE        USERNAME          PASSWORD
+  ─────────────────────────────────────────
+  Admin       admin             admin123
+  Teacher     teacher           teacher123
+  Teacher     dr_khan           khan123
+  Teacher     ms_ali            ali123
+  ─────────────────────────────────────────
+  Student     ali.hassan        ali123
+  Student     sara.ahmed        sara123
+  Student     usman.raza        usman123
+  Student     fatima.malik      fatima123
+  Student     bilal.shah        bilal123
+  Student     zainab.mirza      zainab123
+  Student     hassan.khan       hassan123
+  Student     ayesha.qureshi    ayesha123
+
+  NOTE: Students can also SELF-REGISTER using the "Create New Account"
+        button on the login screen. They fill in their own personal details.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ★  PREREQUISITES  ★
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1. XAMPP        → https://www.apachefriends.org/download.html
+  2. NetBeans IDE → https://netbeans.apache.org/download  (version 12+)
+  3. JDK 11 or 17 → https://www.oracle.com/java/technologies/downloads/
+  4. MySQL Connector/J 8.x JAR
+     → https://dev.mysql.com/downloads/connector/j/
+     → Choose "Platform Independent" → download ZIP → extract the .jar file
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ★  STEP-BY-STEP SETUP  ★
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  STEP 1 – START XAMPP
+  ─────────────────────
+  a. Open XAMPP Control Panel
+  b. Click [Start] next to Apache
+  c. Click [Start] next to MySQL
+  d. Both should show green "Running" status
+
+  STEP 2 – CREATE THE DATABASE
+  ──────────────────────────────
+  a. Open your browser → go to: http://localhost/phpmyadmin
+  b. Click the "SQL" tab at the top
+  c. Open the file:  sql/schema.sql  (from this project folder)
+  d. Copy ALL the text from schema.sql
+  e. Paste it into the phpMyAdmin SQL box
+  f. Click [Go]
+  g. You should see:  "student_performance_db" appear in the left sidebar
+  h. Verify these 5 tables were created:
+       ✓ users
+       ✓ students
+       ✓ courses
+       ✓ enrollments
+       ✓ grades
+
+  STEP 3 – OPEN PROJECT IN NETBEANS
+  ────────────────────────────────────
+  a. Open NetBeans IDE
+  b. Go to: File → Open Project
+  c. Navigate to and select the "StudentPerformanceTracker" folder
+     (the folder containing build.xml and nbproject/)
+  d. Click [Open Project]
+  e. The project will appear in the Projects panel on the left
+
+  STEP 4 – ADD THE MYSQL JAR LIBRARY
+  ────────────────────────────────────
+  a. Place your mysql-connector-java-8.x.jar file inside the /lib/ folder
+  b. In NetBeans: Right-click on the project name → Properties
+  c. Click "Libraries" in the left sidebar
+  d. Click [Add JAR/Folder]
+  e. Navigate to the /lib/ folder → select the mysql-connector jar → [Open]
+  f. Click [OK] to close Properties
+
+  STEP 5 – VERIFY DATABASE CONNECTION (optional)
+  ────────────────────────────────────────────────
+  Open:  src/db/DatabaseConnection.java
+  Confirm these values match your setup:
+
+      HOST     = "localhost"
+      PORT     = "3306"
+      DATABASE = "student_performance_db"
+      USERNAME = "root"
+      PASSWORD = ""       ← empty string for XAMPP default
+
+  If your MySQL has a password, put it inside the quotes.
+
+  STEP 6 – RUN THE APPLICATION
+  ──────────────────────────────
+  a. Right-click on  src/Main.java
+  b. Click "Run File"   OR press  Shift + F6
+  c. The Login screen will open
+  d. Log in with any credentials listed above
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ★  PROJECT STRUCTURE  ★
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  StudentPerformanceTracker/
+  │
+  ├── build.xml                          ← NetBeans build file
+  ├── manifest.mf                        ← JAR manifest
+  ├── SETUP_GUIDE.txt                    ← This file
+  │
+  ├── nbproject/
+  │   ├── project.xml                    ← NetBeans project config
+  │   └── project.properties            ← Build properties
+  │
+  ├── lib/
+  │   └── [PUT mysql-connector-java-8.x.jar HERE]
+  │
+  ├── sql/
+  │   └── schema.sql                    ← ★ RUN THIS FIRST in phpMyAdmin
+  │
+  └── src/
+      ├── Main.java                      ← Application entry point
+      │
+      ├── db/
+      │   └── DatabaseConnection.java    ← Singleton JDBC connection
+      │
+      ├── model/
+      │   ├── User.java
+      │   ├── Student.java
+      │   ├── Course.java
+      │   ├── Enrollment.java
+      │   └── Grade.java
+      │
+      ├── dao/
+      │   ├── UserDAO.java
+      │   ├── StudentDAO.java
+      │   ├── CourseDAO.java
+      │   ├── EnrollmentDAO.java
+      │   └── GradeDAO.java
+      │
+      ├── controller/
+      │   ├── LoginController.java
+      │   └── GradeController.java
+      │
+      ├── utils/
+      │   ├── UITheme.java               ← All colors, fonts, button styles
+      │   ├── ValidationUtils.java       ← Email, phone, grade validation
+      │   └── SessionManager.java        ← Login session singleton
+      │
+      └── view/
+          ├── LoginFrame.java            ← Login screen (all 3 roles)
+          ├── SignUpDialog.java           ← Self-registration for all roles
+          ├── AdminDashboard.java        ← Full admin portal
+          ├── TeacherDashboard.java      ← Teacher grade management
+          ├── StudentDashboard.java      ← Student portal (6 tabs)
+          ├── AddEditStudentDialog.java  ← Add/Edit student form
+          ├── AddEditCourseDialog.java   ← Add/Edit course form
+          ├── GradeEntryDialog.java      ← Grade entry with live preview
+          └── ReportViewer.java          ← HTML report viewer + export
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ★  DATABASE TABLES OVERVIEW  ★
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  TABLE: users
+  ─────────────────────────────────────────────────────────────
+  id | username | password | role (admin/teacher/student) | student_id
+
+  TABLE: students
+  ─────────────────────────────────────────────────────────────
+  id | name | email | phone | dob | address | enrollment_date
+
+  TABLE: courses
+  ─────────────────────────────────────────────────────────────
+  id | course_name | course_code | credits | teacher_name
+
+  TABLE: enrollments  (links students ↔ courses)
+  ─────────────────────────────────────────────────────────────
+  id | student_id → students.id | course_id → courses.id | enrollment_date
+
+  TABLE: grades  (one grade per enrollment)
+  ─────────────────────────────────────────────────────────────
+  id | enrollment_id → enrollments.id | grade_value | grade_letter
+     | semester | academic_year
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ★  FEATURES PER ROLE  ★
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ADMIN (admin / admin123)
+  ─────────────────────────
+  ✓ Manage Students  – Add / Edit / Delete / Search / Filter by date
+  ✓ Manage Courses   – Add / Edit / Delete / Search
+  ✓ Manage Enrollments – Enroll students, remove enrollments
+  ✓ Manage Users     – View all accounts, add new users, delete users
+  ✓ Reports          – Student Summary, Grade Report, Transcript, Grade Sheet
+  ✓ Export reports   – HTML and TXT formats
+
+  TEACHER (teacher / teacher123)
+  ────────────────────────────────
+  ✓ View all enrolled students (filter by course)
+  ✓ Enter / Update grades (live letter grade preview)
+  ✓ Filter grades by course and semester
+  ✓ Generate course grade sheets
+  ✓ Export grade reports
+
+  STUDENT (self-register OR use sample logins)
+  ──────────────────────────────────────────────
+  ✓ Home tab        – Welcome card, stat cards, recent grades
+  ✓ My Grades tab   – All grades with semester filter, GPA summary
+  ✓ My Courses tab  – All enrolled courses with teacher and grade info
+  ✓ Transcript tab  – Full printable transcript, export HTML/TXT
+  ✓ My Profile tab  – Edit phone, DOB, address
+  ✓ Security tab    – Change login password
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ★  TROUBLESHOOTING  ★
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  PROBLEM: "Cannot connect to database" popup on startup
+  FIX:     Make sure XAMPP MySQL is running (green in Control Panel)
+           Check DatabaseConnection.java – host/port/username/password
+
+  PROBLEM: ClassNotFoundException for MySQL driver
+  FIX:     You forgot to add the mysql-connector-java-8.x.jar to Libraries
+           Right-click Project → Properties → Libraries → Add JAR/Folder
+
+  PROBLEM: "Table doesn't exist" SQL error
+  FIX:     Re-run schema.sql in phpMyAdmin. Make sure you see
+           "student_performance_db" in the left sidebar of phpMyAdmin.
+
+  PROBLEM: Application won't compile
+  FIX:     Go to Tools → Java Platforms → must be JDK 11 or JDK 17
+           Not JDK 8 (project uses Java 11 features)
+
+  PROBLEM: Login fails even with correct password
+  FIX:     Database may not have sample data. Re-run schema.sql fully.
+           The INSERT statements at the bottom of schema.sql add the users.
+
+  PROBLEM: Student signup – "email already exists" error
+  FIX:     That student email is already in the database (from sample data).
+           Use a different email, or log in with the existing student account.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ★  GRADING SCALE  ★
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Score     Letter    Status
+  ──────────────────────────
+  95 – 100    A+       Pass
+  90 – 94     A        Pass
+  85 – 89     B+       Pass
+  80 – 84     B        Pass
+  75 – 79     B-       Pass
+  65 – 74     C        Pass
+  50 – 64     D        Pass
+   0 – 49     F        FAIL
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  © 2025  Dept. of Software Engineering, MUET – Khairpur Mir's
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

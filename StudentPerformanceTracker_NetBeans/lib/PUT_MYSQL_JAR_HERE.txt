@@ -1,0 +1,14 @@
+PUT YOUR MYSQL CONNECTOR JAR FILE IN THIS FOLDER
+=================================================
+
+Download mysql-connector-java-8.x.jar from:
+  https://dev.mysql.com/downloads/connector/j/
+
+Then rename it to:
+  mysql-connector-java-8.x.jar
+
+And place it in this /lib/ folder.
+
+Then in NetBeans:
+  Right-click Project → Properties → Libraries → Add JAR/Folder
+  → Select the jar file from this lib folder → OK
